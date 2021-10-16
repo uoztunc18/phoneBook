@@ -1,0 +1,189 @@
+<div class="container p-2">
+  <div class="row p-2">
+    <div class="col-8 bg-danger mx-auto">
+      <!-- Header -->
+      <h3 class="text-white p-3" style="text-align:center">
+        {{ getName() }}'s Phonebook
+      </h3>
+
+      <!-- Button: Create Button-->
+      <div class="row m-3 text-center">
+        <button
+          [class]="getBtn()"
+          class="btn mb-3 btn-warning"
+          (click)="createCommand()"
+        >
+          Create new person
+        </button>
+
+        <div class="row m-2 p-3 btn-warning" *ngIf="gonnaAdd">
+          <!-- Name text box -->
+          <div class="input-group mb-2">
+            <input
+                [(ngModel)]="name"
+                class="form-control text-center"
+                type="text"
+                placeholder="Name"
+                aria-label="Name"
+              />
+          </div>
+          <!-- Surname text box -->
+          <div class="input-group mb-2">
+            <input
+               [(ngModel)]="surname"
+                class="form-control text-center"
+                type="text"
+                placeholder="Surname"
+                aria-label="Surname"
+              />
+          </div>
+          <!-- Phone number text box -->
+          <div class="input-group mb-2">
+            <input
+                [(ngModel)]="no"
+                class="form-control text-center"
+                type="text"
+                placeholder="Phone number"
+                aria-label="Phone number"
+              />
+          </div>
+          <!-- Email text box -->
+          <div class="input-group">
+            <input
+                [(ngModel)]="mail"
+                class="form-control text-center"
+                type="text"
+                placeholder="Email"
+                aria-label="Email"
+              />
+          </div>
+
+          <!-- Button: Add-Cancel -->
+          <div class="col text-center">
+            <button class="btn mt-2 btn-sm btn-success" (click)="addPerson()" style="width: 100px">
+              Add
+            </button>
+
+            <!-- Button: Cancel -->
+            <button
+              class="btn mt-2 btn-sm btn-secondary"
+              style="width: 100px"
+              (click)="cancel()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+
+        <!-- Button: Show the list -->
+        <button class="btn btn-warning" (click)="showButton()">
+          {{ showButtonMessage }} the list
+        </button>
+      </div>
+
+      <!-- List -->
+      <div class="row mx-auto" *ngIf="!show">
+
+        <label class="text-center" for="">
+          Filter by
+        </label>
+        <div class="row p-3 mx-auto">
+          <!-- Name text box -->
+          <div class="input-group mb-2">
+            <input
+                [(ngModel)]="fname"
+                class="form-control text-center"
+                type="text"
+                placeholder="Name"
+                aria-label="Name"
+              />
+          </div>
+          <!-- Surname text box -->
+          <div class="input-group- mb-2">
+            <input
+               [(ngModel)]="fsurname"
+                class="form-control text-center"
+                type="text"
+                placeholder="Surname"
+                aria-label="Surname"
+              />
+          </div>
+          <!-- Phone number text box -->
+          <div class="input-group mb-2">
+            <input
+                [(ngModel)]="fno"
+                class="form-control text-center"
+                type="text"
+                placeholder="Phone number"
+                aria-label="Phone number"
+              />
+          </div>
+          <!-- Email text box -->
+          <div class="input-group">
+            <input
+                [(ngModel)]="fmail"
+                class="form-control text-center"
+                type="text"
+                placeholder="Email"
+                aria-label="Email"
+              />
+          </div>
+
+        </div>
+
+        <table class="table table-bordered text-center">
+          <thead class="bg-secondary">
+            <tr>
+              <th>
+                Index
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Surname
+              </th>
+              <th>
+                Phone number
+              </th>
+              <th>
+                Email
+              </th>
+              <th>
+
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- Logged people -->
+            <tr class="bg-light"
+              *ngFor="let item of (getItems() | name: fname | surname: fsurname | no: fno | mail: fmail); let i = index;">
+              <td>
+                {{ i+1 }}
+              </td>
+              <td>
+                {{ item.name }}
+              </td>
+              <td>
+                {{ item.surname }}
+              </td>
+              <td>
+                {{ item.no }}
+              </td>
+              <td>
+                {{ item.mail }}
+              </td>
+              <td>
+                <!-- Button: Delete -->
+                <button class="btn-sm bg-danger" (click)="delete(item)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
